@@ -22,7 +22,7 @@ public class RATPBridge {
 		public final int delay;
 		public final String message;
 
-		private RATPTime(String direction, int delay) {
+		public RATPTime(String direction, int delay) {
 			this.direction = direction;
 			this.delay = delay;
 			this.message = "";
@@ -35,11 +35,21 @@ public class RATPBridge {
 		}
 
 		public void display() {
-			System.out.println(this.direction + ": " + this.delay);
+			System.out.println(this.direction + ": "
+					+ (this.delay != -1 ? this.delay : this.message));
 		}
 	}
 
-	public class RATPStation {
+	public static class RATPStation {
+		public final String name;
+		public final int station_id;
+		public final int direction_id;
+
+		public RATPStation(String name, int station_id, int direction_id) {
+			this.name = name;
+			this.station_id = station_id;
+			this.direction_id = direction_id;
+		}
 	}
 
 	public static Collection<RATPTime> get_times(RATPStation station) {
@@ -53,7 +63,6 @@ public class RATPBridge {
 					urlConnection.getInputStream());
 
 			XmlPullParser parser = Xml.newPullParser();
-			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
 			parser.setInput(in, null);
 			parser.nextTag();
 
