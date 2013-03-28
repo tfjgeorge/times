@@ -12,13 +12,13 @@ import java.util.List;
 
 import org.xmlpull.v1.XmlPullParser;
 
+import fr.mines.times.RATPContent.RATPStation;
+
 import android.os.AsyncTask;
 import android.util.Xml;
 
 public class RATPBridge {
 
-	public static class RATPLine {
-	}
 
 	public static class RATPDirection {
 		public final int direction_id;
@@ -48,21 +48,6 @@ public class RATPBridge {
 		public void display() {
 			System.out.println(this.direction + ": "
 					+ (this.delay != -1 ? this.delay : this.message));
-		}
-	}
-
-	public static class RATPStation {
-		public final String name;
-		public final int station_id;
-		public final int direction_id;
-		public final int network_id;
-
-		public RATPStation(String name, int station_id, int direction_id,
-				int network_id) {
-			this.name = name;
-			this.station_id = station_id;
-			this.direction_id = direction_id;
-			this.network_id = network_id;
 		}
 	}
 

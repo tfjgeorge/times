@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import fr.mines.times.RATPBridge.RATPDirection;
 import fr.mines.times.RATPBridge.RATPTime;
+import fr.mines.times.RATPContent.RATPStation;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.app.Activity;
@@ -23,7 +24,9 @@ public class HomeActivity extends Activity {
 
 		RATPContent ratp_content = new RATPContent(this);
 		RATPDirection ligne1 = new RATPDirection(1);
-		ratp_content.get_stations(ligne1);
+		for (RATPStation s : ratp_content.get_stations(ligne1)) {
+			s.display();
+		}
 	}
 
 	@Override
