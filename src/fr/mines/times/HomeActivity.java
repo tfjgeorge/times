@@ -1,9 +1,13 @@
 package fr.mines.times;
 
+import java.io.IOException;
+
+import fr.mines.times.RATPBridge.RATPDirection;
 import fr.mines.times.RATPBridge.RATPTime;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
 
 public class HomeActivity extends Activity {
@@ -17,10 +21,9 @@ public class HomeActivity extends Activity {
 				.permitAll().build();
 		StrictMode.setThreadPolicy(policy);
 
-		for (RATPTime i : RATPBridge.get_times(null)) {
-			i.display();
-		}
-
+		RATPContent ratp_content = new RATPContent(this);
+		RATPDirection ligne1 = new RATPDirection(1);
+		ratp_content.get_stations(ligne1);
 	}
 
 	@Override

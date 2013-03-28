@@ -17,6 +17,17 @@ import android.util.Xml;
 
 public class RATPBridge {
 
+	public static class RATPLine {
+	}
+
+	public static class RATPDirection {
+		public final int direction_id;
+
+		public RATPDirection(int direction_id) {
+			this.direction_id = direction_id;
+		}
+	}
+
 	public static class RATPTime {
 		public final String direction;
 		public final int delay;
@@ -44,11 +55,14 @@ public class RATPBridge {
 		public final String name;
 		public final int station_id;
 		public final int direction_id;
+		public final int network_id;
 
-		public RATPStation(String name, int station_id, int direction_id) {
+		public RATPStation(String name, int station_id, int direction_id,
+				int network_id) {
 			this.name = name;
 			this.station_id = station_id;
 			this.direction_id = direction_id;
+			this.network_id = network_id;
 		}
 	}
 
