@@ -79,7 +79,6 @@ public class FindStationActivity extends Activity {
 		List<RATPStation> stations = ratp_content.get_stations(line);
 		station_adapter.clear();
 		station_adapter.addAll(stations);
-		station_adapter.notifyDataSetChanged();
 
 		station_picker_activated = false;
 		

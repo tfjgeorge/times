@@ -3,6 +3,8 @@ package fr.mines.times;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.mines.times.FavoritesDB.Favorite;
+
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.app.Activity;
@@ -10,11 +12,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 
 public class HomeActivity extends Activity {
 
 	public static int FindStationActivityCode = 1;
+	private FavoritesDB favorites_db;
+	private GridView favorite_gridview;
+	private ArrayAdapter<Favorite> favorite_adapter;
 
 	private Context context;
 
@@ -43,6 +50,14 @@ public class HomeActivity extends Activity {
 				startActivityForResult(intent, FindStationActivityCode);
 			}
 		});
+
+		favorites_db = new FavoritesDB(this);
+		favorite_adapter = new ArrayAdapter<Favorite>(this,
+				android.R.layout.simple_dropdown_item_1line,
+				favorites_db.get_favorites(this));
+		favorite_gridview = (GridView) findViewById(R.id.gridView1);
+
+		favorite_gridview.setAdapter(favorite_adapter);
 	}
 
 	@Override
@@ -54,11 +69,11 @@ public class HomeActivity extends Activity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
 		if (requestCode == FindStationActivityCode && resultCode == RESULT_OK) {
 			int station_id = data.getIntExtra("station_id", -1);
 			ArrayList<Integer> stations = new ArrayList<Integer>();
 			stations.add(station_id);
+			favorites_db.add_favorite(station_id);
 			display_times(stations);
 		}
 	}
