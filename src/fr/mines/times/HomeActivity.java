@@ -57,8 +57,8 @@ public class HomeActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
-		if (resultCode == FindStationActivityCode) {
-
+		if (requestCode == FindStationActivityCode && resultCode == RESULT_OK) {
+			System.out.println(data.getIntExtra("station_id", -1));
 		}
 	}
 
