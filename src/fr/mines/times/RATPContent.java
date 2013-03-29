@@ -42,13 +42,15 @@ public class RATPContent {
 		public final int station_id;
 		public final int direction_id;
 		public final int network_id;
+		public final int geolocated_id;
 
 		public RATPStation(String name, int station_id, int direction_id,
-				int network_id) {
+				int network_id, int geolocated_id) {
 			this.name = name;
 			this.station_id = station_id;
 			this.direction_id = direction_id;
 			this.network_id = network_id;
+			this.geolocated_id = geolocated_id;
 		}
 
 		@Override
@@ -70,16 +72,30 @@ public class RATPContent {
 		db_helper.openDataBase();
 	}
 
+	public RATPStation get_station(int station_id) {
+
+		String selection = "station_id=" + station_id;
+		String query = "SELECT * FROM station_network sn INNER JOIN geolocatedstation gs ON sn.station_id=gs.station WHERE "
+				+ selection;
+
+		Cursor cursor = db_helper.getReadableDatabase().rawQuery(query, null);
+		cursor.moveToNext();
+		return new RATPStation(cursor.getString(3), cursor.getInt(1),
+				cursor.getInt(4), cursor.getInt(1), cursor.getInt(5));
+
+	}
+
 	public List<RATPStation> get_stations(RATPDirection direction) {
 
 		String selection = "direction_id=" + direction.direction_id;
 		List<RATPStation> output = new ArrayList<RATPStation>();
+		String query = "SELECT * FROM station_network sn INNER JOIN geolocatedstation gs ON sn.station_id=gs.station WHERE "
+				+ selection;
 
-		Cursor cursor = db_helper.getReadableDatabase().query(
-				"station_network", null, selection, null, null, null, null);
+		Cursor cursor = db_helper.getReadableDatabase().rawQuery(query, null);
 		while (cursor.moveToNext()) {
 			output.add(new RATPStation(cursor.getString(3), cursor.getInt(1),
-					cursor.getInt(4), cursor.getInt(1)));
+					cursor.getInt(4), cursor.getInt(1), cursor.getInt(5)));
 		}
 
 		return output;

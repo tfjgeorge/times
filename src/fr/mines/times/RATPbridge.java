@@ -33,17 +33,19 @@ public class RATPBridge {
 			this.message = message;
 		}
 
-		public void display() {
-			System.out.println(this.direction + ": "
-					+ (this.delay != -1 ? this.delay : this.message));
+		public String toString() {
+			return this.direction + ": "
+					+ (this.delay != -1 ? this.delay : this.message);
 		}
 	}
 
-	public static Collection<RATPTime> get_times(RATPStation station) {
+	public static ArrayList<RATPTime> get_times(RATPStation station) {
 
 		try {
 			URL url = new URL(
-					"http://ratp-bridge.fabernovel.com/ratp.schedule?reseau=1&direction=80443&station=344832");
+					"http://ratp-bridge.fabernovel.com/ratp.schedule?reseau=1&direction="
+							+ station.direction_id + "&station="
+							+ station.geolocated_id);
 			HttpURLConnection urlConnection = (HttpURLConnection) url
 					.openConnection();
 			InputStream in = new BufferedInputStream(
@@ -53,7 +55,7 @@ public class RATPBridge {
 			parser.setInput(in, null);
 			parser.nextTag();
 
-			List<RATPTime> times = new ArrayList<RATPTime>();
+			ArrayList<RATPTime> times = new ArrayList<RATPTime>();
 
 			while (parser.next() != XmlPullParser.END_DOCUMENT) {
 				if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -61,7 +63,7 @@ public class RATPBridge {
 				}
 				String name = parser.getName();
 				if (name.equals("item")) {
-					List<String> text_lines = new ArrayList<String>();
+					ArrayList<String> text_lines = new ArrayList<String>();
 
 					while (parser.next() != XmlPullParser.END_TAG) {
 						parser.next();

@@ -1,5 +1,8 @@
 package fr.mines.times;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.app.Activity;
@@ -53,8 +56,17 @@ public class HomeActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		if (requestCode == FindStationActivityCode && resultCode == RESULT_OK) {
-			System.out.println(data.getIntExtra("station_id", -1));
+			int station_id = data.getIntExtra("station_id", -1);
+			ArrayList<Integer> stations = new ArrayList<Integer>();
+			stations.add(station_id);
+			display_times(stations);
 		}
+	}
+
+	private void display_times(ArrayList<Integer> station_ids) {
+		Intent intent = new Intent(context, TimesActivity.class);
+		intent.putIntegerArrayListExtra("station_ids", station_ids);
+		startActivity(intent);
 	}
 
 }
