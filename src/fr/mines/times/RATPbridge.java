@@ -19,15 +19,6 @@ import android.util.Xml;
 
 public class RATPBridge {
 
-
-	public static class RATPDirection {
-		public final int direction_id;
-
-		public RATPDirection(int direction_id) {
-			this.direction_id = direction_id;
-		}
-	}
-
 	public static class RATPTime {
 		public final String direction;
 		public final int delay;
