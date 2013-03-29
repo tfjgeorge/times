@@ -1,9 +1,7 @@
 package fr.mines.times;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -14,7 +12,6 @@ import org.xmlpull.v1.XmlPullParser;
 
 import fr.mines.times.RATPContent.RATPStation;
 
-import android.os.AsyncTask;
 import android.util.Xml;
 
 public class RATPBridge {

@@ -2,13 +2,7 @@ package fr.mines.times;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-
-import fr.mines.times.RATPContent.RATPLine;
-import fr.mines.times.RATPContent.RATPStation;
-
 import android.content.Context;
 import android.database.Cursor;
 
@@ -57,6 +51,7 @@ public class RATPContent {
 			this.network_id = network_id;
 		}
 
+		@Override
 		public String toString() {
 			return name;
 		}

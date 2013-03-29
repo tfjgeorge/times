@@ -1,24 +1,18 @@
 package fr.mines.times;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import fr.mines.times.RATPContent.RATPLine;
 import fr.mines.times.RATPContent.RATPStation;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
-import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 
 public class FindStationActivity extends Activity {
@@ -36,7 +30,7 @@ public class FindStationActivity extends Activity {
 		setContentView(R.layout.find_station_activity);
 
 		ratp_content = new RATPContent(this);
-		List<RATPLine> lines = (List<RATPLine>) ratp_content.get_lines(1);
+		List<RATPLine> lines = ratp_content.get_lines(1);
 
 		line_picker = (AutoCompleteTextView) findViewById(R.id.line_picker);
 		station_picker = (Spinner) findViewById(R.id.station_picker);

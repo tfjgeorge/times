@@ -1,15 +1,10 @@
 package fr.mines.times;
 
-import java.io.IOException;
-
-import fr.mines.times.RATPBridge.RATPTime;
-import fr.mines.times.RATPContent.RATPStation;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
